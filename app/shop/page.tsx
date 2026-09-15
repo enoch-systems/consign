@@ -1,390 +1,204 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
-import Image from "next/image"
+import { useState } from "react"
 import Link from "next/link"
-import { ShoppingBag, SlidersHorizontal, X } from "lucide-react"
-import { Header } from "@/components/boty/header"
-import { Footer } from "@/components/boty/footer"
+import { ArrowRight, CheckCircle2, Globe2, ShieldCheck, Truck } from "lucide-react"
+import { SiteHeader } from "@/components/consign/site-header"
+import { SiteFooter } from "@/components/consign/site-footer"
+import { Card, CardContent } from "@/components/ui/card"
 
-const products = [
-  // Serums
+const services = [
   {
-    id: "radiance-serum",
-    name: "Radiance Serum",
-    description: "Vitamin C brightening formula",
-    price: 68,
-    originalPrice: null,
-    image: "/images/products/serum-bottles-1.png",
-    badge: "Bestseller",
-    category: "serums"
+    id: "priority-express",
+    title: "Priority Express",
+    category: "domestic",
+    badge: "Most requested",
+    description: "Fast, reliable domestic movement for urgent shipments that need clear visibility and predictable delivery windows.",
+    summary: "Same-day coordination, route monitoring, and delivery confirmation for time-sensitive consignments.",
+    features: ["Pickup scheduling", "Live route updates", "Delivery confirmation"],
+    detail: "Ideal for manufacturers, retailers, and distributors moving high-priority inventory within Nigeria.",
   },
   {
-    id: "hydrating-serum",
-    name: "Hydrating Serum",
-    description: "Hyaluronic acid moisture boost",
-    price: 62,
-    originalPrice: null,
-    image: "/images/products/eye-serum-bottles.png",
-    badge: null,
-    category: "serums"
+    id: "international-freight",
+    title: "International Freight",
+    category: "international",
+    badge: "Global",
+    description: "End-to-end coordination for cross-border freight, export documentation, and customs-ready shipments.",
+    summary: "Structured international logistics with transparent milestones from origin to destination.",
+    features: ["Export documentation", "Customs support", "Milestone tracking"],
+    detail: "Built for businesses shipping goods across West Africa, the Middle East, Europe, and beyond.",
   },
   {
-    id: "age-defense-serum",
-    name: "Age Defense Serum",
-    description: "Retinol & peptide complex",
-    price: 78,
-    originalPrice: null,
-    image: "/images/products/amber-dropper-bottles.png",
-    badge: "New",
-    category: "serums"
+    id: "warehousing",
+    title: "Fulfilment & Warehousing",
+    category: "commercial",
+    badge: "Operations",
+    description: "Secure storage, inventory handling, and dispatch coordination for growing commercial operations.",
+    summary: "Flexible warehousing support that keeps stock organized and ready for distribution.",
+    features: ["Inbound receiving", "Storage allocation", "Dispatch planning"],
+    detail: "A practical solution for retailers, wholesalers, and brands that need dependable stock movement.",
   },
   {
-    id: "glow-serum",
-    name: "Glow Serum",
-    description: "Niacinamide brightening boost",
-    price: 58,
-    originalPrice: 68,
-    image: "/images/products/spray-bottles.png",
-    badge: "Sale",
-    category: "serums"
-  },
-  // Creams
-  {
-    id: "hydra-cream",
-    name: "Hydra Cream",
-    description: "Deep moisture with hyaluronic acid",
-    price: 54,
-    originalPrice: null,
-    image: "/images/products/cream-jars-colored.png",
-    badge: null,
-    category: "moisturizers"
+    id: "last-mile-delivery",
+    title: "Last-Mile Delivery",
+    category: "support",
+    badge: "Customer care",
+    description: "Professional delivery management for final-mile handover, customer communication, and proof-of-delivery.",
+    summary: "Clear updates, confirmation workflows, and a consistent handoff experience for customers.",
+    features: ["Customer updates", "Proof of delivery", "Exception handling"],
+    detail: "Designed for businesses that require a polished delivery experience and stronger post-shipment visibility.",
   },
   {
-    id: "gentle-cleanser",
-    name: "Gentle Cleanser",
-    description: "Soothing botanical wash",
-    price: 38,
-    originalPrice: 48,
-    image: "/images/products/tube-bottles.png",
-    badge: "Sale",
-    category: "cleansers"
+    id: "secure-document",
+    title: "Secure Document Forwarding",
+    category: "support",
+    badge: "Compliance",
+    description: "Confidential document transfers with controlled handling, traceability, and time-sensitive delivery.",
+    summary: "A dependable option for legal, financial, and regulated paperwork that must move safely and quickly.",
+    features: ["Signed handling", "Tracking visibility", "Priority movement"],
+    detail: "Useful for contract packages, compliance paperwork, and business correspondence requiring assurance.",
   },
-  {
-    id: "night-cream",
-    name: "Night Cream",
-    description: "Restorative overnight treatment",
-    price: 64,
-    originalPrice: null,
-    image: "/images/products/jars-wooden-lid.png",
-    badge: "Bestseller",
-    category: "moisturizers"
-  },
-  {
-    id: "day-cream-spf",
-    name: "Day Cream SPF 30",
-    description: "Protection & hydration",
-    price: 58,
-    originalPrice: null,
-    image: "/images/products/pump-bottles-lavender.png",
-    badge: null,
-    category: "moisturizers"
-  },
-  // Oils
-  {
-    id: "renewal-oil",
-    name: "Renewal Oil",
-    description: "Nourishing facial oil blend",
-    price: 72,
-    originalPrice: null,
-    image: "/images/products/amber-dropper-bottles.png",
-    badge: "New",
-    category: "oils"
-  },
-  {
-    id: "rosehip-oil",
-    name: "Rosehip Oil",
-    description: "Pure organic rosehip extract",
-    price: 48,
-    originalPrice: null,
-    image: "/images/products/serum-bottles-1.png",
-    badge: null,
-    category: "oils"
-  },
-  {
-    id: "jojoba-oil",
-    name: "Jojoba Oil",
-    description: "Balancing & lightweight",
-    price: 42,
-    originalPrice: null,
-    image: "/images/products/spray-bottles.png",
-    badge: null,
-    category: "oils"
-  },
-  {
-    id: "argan-oil",
-    name: "Argan Oil",
-    description: "Moroccan beauty elixir",
-    price: 56,
-    originalPrice: null,
-    image: "/images/products/pump-bottles-cream.png",
-    badge: "Bestseller",
-    category: "oils"
-  },
-  // Masks & Toners (original products)
-  {
-    id: "glow-mask",
-    name: "Glow Mask",
-    description: "Weekly brightening treatment",
-    price: 45,
-    originalPrice: null,
-    image: "/images/products/mask.jpg",
-    badge: null,
-    category: "masks"
-  },
-  {
-    id: "balance-toner",
-    name: "Balance Toner",
-    description: "pH restoring mist",
-    price: 32,
-    originalPrice: null,
-    image: "/images/products/toner.jpg",
-    badge: "New",
-    category: "toners"
-  }
 ]
 
-const categories = ["all", "serums", "moisturizers", "cleansers", "oils", "masks", "toners"]
+const categories = [
+  { label: "All services", value: "all" },
+  { label: "Domestic", value: "domestic" },
+  { label: "International", value: "international" },
+  { label: "Commercial", value: "commercial" },
+  { label: "Support", value: "support" },
+]
+
+const quickStats = [
+  { icon: Truck, label: "On-time visibility", value: "98.4%" },
+  { icon: Globe2, label: "Connected lanes", value: "24+" },
+  { icon: ShieldCheck, label: "Active support", value: "24/7" },
+]
 
 export default function ShopPage() {
   const [selectedCategory, setSelectedCategory] = useState("all")
-  const [showFilters, setShowFilters] = useState(false)
-  const [isVisible, setIsVisible] = useState(false)
-  const gridRef = useRef<HTMLDivElement>(null)
 
-  const filteredProducts = selectedCategory === "all"
-    ? products
-    : products.filter(p => p.category === selectedCategory)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true)
-        }
-      },
-      { threshold: 0.1 }
-    )
-
-    if (gridRef.current) {
-      observer.observe(gridRef.current)
-    }
-
-    return () => {
-      if (gridRef.current) {
-        observer.unobserve(gridRef.current)
-      }
-    }
-  }, [])
-
-  // Reset animation when category changes
-  useEffect(() => {
-    setIsVisible(false)
-    const timer = setTimeout(() => setIsVisible(true), 50)
-    return () => clearTimeout(timer)
-  }, [selectedCategory])
+  const filteredServices =
+    selectedCategory === "all"
+      ? services
+      : services.filter((service) => service.category === selectedCategory)
 
   return (
-    <main className="min-h-screen">
-      <Header />
-      
-      <div className="pt-28 pb-20">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          {/* Header */}
-          <div className="text-center mb-12">
-            <span className="text-sm tracking-[0.3em] uppercase text-primary mb-4 block">
-              Our Collection
-            </span>
-            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-foreground mb-4 text-balance">
-              Shop All Products
-            </h1>
-            <p className="text-lg text-muted-foreground max-w-md mx-auto">
-              Discover our complete range of natural skincare essentials
-            </p>
-          </div>
+    <div className="min-h-screen bg-background">
+      <SiteHeader />
 
-          {/* Filter Bar */}
-          <div className="flex items-center justify-between mb-10 pb-6 border-b border-border/50">
-            <button
-              type="button"
-              onClick={() => setShowFilters(!showFilters)}
-              className="lg:hidden inline-flex items-center gap-2 text-sm text-foreground"
+      <main className="mx-auto max-w-6xl px-4 py-12 md:py-16">
+        <section className="rounded-3xl border bg-primary px-6 py-10 text-primary-foreground shadow-sm md:px-10 md:py-14">
+          <p className="text-sm font-medium uppercase tracking-[0.2em] text-accent">Professional logistics services</p>
+          <h1 className="mt-4 max-w-3xl text-3xl font-semibold tracking-tight md:text-5xl">
+            Freight solutions designed for reliable operations.
+          </h1>
+          <p className="mt-4 max-w-2xl text-base text-primary-foreground/80 md:text-lg">
+            Organize domestic transfers, international freight, and support services through a single modern platform.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link
+              href="/book"
+              className="inline-flex items-center gap-2 rounded-md bg-accent px-5 py-3 text-sm font-medium text-accent-foreground transition hover:bg-accent/90"
             >
-              <SlidersHorizontal className="w-4 h-4" />
-              Filters
-            </button>
+              Book a shipment
+              <ArrowRight className="size-4" />
+            </Link>
+            <Link
+              href="/track"
+              className="inline-flex items-center gap-2 rounded-md border border-primary-foreground/30 bg-transparent px-5 py-3 text-sm font-medium text-primary-foreground transition hover:bg-primary-foreground/5"
+            >
+              Track a shipment
+            </Link>
+          </div>
+        </section>
 
-            {/* Desktop Categories */}
-            <div className="hidden lg:flex items-center gap-2">
-              {categories.map((category) => (
+        <section className="mt-8 grid gap-4 md:grid-cols-3">
+          {quickStats.map(({ icon: Icon, label, value }) => (
+            <Card key={label}>
+              <CardContent className="flex items-center gap-4 pt-6">
+                <div className="flex size-11 items-center justify-center rounded-full bg-primary/10 text-primary">
+                  <Icon className="size-5" />
+                </div>
+                <div>
+                  <p className="text-sm text-muted-foreground">{label}</p>
+                  <p className="text-xl font-semibold">{value}</p>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </section>
+
+        <section className="mt-12">
+          <div className="flex flex-col gap-4 border-b pb-6 md:flex-row md:items-center md:justify-between">
+            <div>
+              <p className="text-sm text-muted-foreground">Service catalog</p>
+              <h2 className="text-2xl font-semibold tracking-tight">Choose a solution</h2>
+            </div>
+
+            <div className="flex flex-wrap gap-2">
+              {categories.map(({ label, value }) => (
                 <button
-                  key={category}
+                  key={value}
                   type="button"
-                  onClick={() => setSelectedCategory(category)}
-                  className={`px-4 py-2 rounded-full text-sm capitalize boty-transition bg-popover ${
-                    selectedCategory === category
+                  onClick={() => setSelectedCategory(value)}
+                  className={`rounded-full px-4 py-2 text-sm transition ${
+                    selectedCategory === value
                       ? "bg-primary text-primary-foreground"
-                      : "bg-card text-foreground/70 hover:text-foreground boty-shadow"
+                      : "bg-secondary text-foreground hover:bg-secondary/80"
                   }`}
                 >
-                  {category}
+                  {label}
                 </button>
               ))}
             </div>
-
-            <span className="text-sm text-muted-foreground">
-              {filteredProducts.length} {filteredProducts.length === 1 ? "product" : "products"}
-            </span>
           </div>
 
-          {/* Mobile Filters */}
-          {showFilters && (
-            <div className="lg:hidden fixed inset-0 z-50 bg-background">
-              <div className="p-6">
-                <div className="flex items-center justify-between mb-8">
-                  <h2 className="font-serif text-2xl text-foreground">Filters</h2>
-                  <button
-                    type="button"
-                    onClick={() => setShowFilters(false)}
-                    className="p-2 text-foreground/70 hover:text-foreground"
-                  >
-                    <X className="w-5 h-5" />
-                  </button>
-                </div>
-                <div className="space-y-3">
-                  {categories.map((category) => (
-                    <button
-                      key={category}
-                      type="button"
-                      onClick={() => {
-                        setSelectedCategory(category)
-                        setShowFilters(false)
-                      }}
-                      className={`w-full px-6 py-4 rounded-2xl text-left capitalize boty-transition ${
-                        selectedCategory === category
-                          ? "bg-primary text-primary-foreground"
-                          : "bg-card text-foreground boty-shadow"
-                      }`}
-                    >
-                      {category}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
-          )}
+          <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {filteredServices.map((service) => (
+              <Card key={service.id} className="h-full">
+                <CardContent className="flex h-full flex-col gap-5 p-6">
+                  <div className="flex items-center justify-between gap-3">
+                    <span className="rounded-full bg-primary/10 px-2.5 py-1 text-xs font-medium text-primary">
+                      {service.badge}
+                    </span>
+                    <span className="text-xs uppercase tracking-[0.18em] text-muted-foreground">{service.category}</span>
+                  </div>
 
-          {/* Product Grid */}
-          <div 
-            ref={gridRef}
-            className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
-          >
-            {filteredProducts.map((product, index) => (
-              <ProductCard 
-                key={product.id}
-                product={product}
-                index={index}
-                isVisible={isVisible}
-              />
+                  <div>
+                    <h3 className="text-xl font-semibold">{service.title}</h3>
+                    <p className="mt-2 text-sm text-muted-foreground">{service.description}</p>
+                  </div>
+
+                  <p className="text-sm text-foreground/80">{service.summary}</p>
+
+                  <ul className="space-y-2 text-sm text-muted-foreground">
+                    {service.features.map((feature) => (
+                      <li key={feature} className="flex items-start gap-2">
+                        <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-primary" />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="mt-auto flex items-center justify-between border-t pt-4">
+                    <p className="text-sm text-muted-foreground">{service.detail}</p>
+                  </div>
+
+                  <Link
+                    href={`/product/${service.id}`}
+                    className="mt-2 inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline"
+                  >
+                    View service details
+                    <ArrowRight className="size-4" />
+                  </Link>
+                </CardContent>
+              </Card>
             ))}
           </div>
-        </div>
-      </div>
+        </section>
+      </main>
 
-      <Footer />
-    </main>
-  )
-}
-
-function ProductCard({ 
-  product, 
-  index, 
-  isVisible 
-}: { 
-  product: typeof products[0]
-  index: number
-  isVisible: boolean
-}) {
-  const [imageLoaded, setImageLoaded] = useState(false)
-
-  return (
-    <Link
-      href={`/product/${product.id}`}
-      className={`group transition-all duration-700 ease-out ${
-        isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
-      }`}
-      style={{ transitionDelay: `${index * 80}ms` }}
-    >
-      <div className="bg-card rounded-3xl overflow-hidden boty-shadow boty-transition group-hover:scale-[1.02]">
-        {/* Image */}
-        <div className="relative aspect-square bg-muted overflow-hidden">
-          {/* Skeleton */}
-          <div 
-            className={`absolute inset-0 bg-gradient-to-br from-muted via-muted/50 to-muted animate-pulse transition-opacity duration-500 ${
-              imageLoaded ? 'opacity-0' : 'opacity-100'
-            }`}
-          />
-          
-          <Image
-            src={product.image || "/placeholder.svg"}
-            alt={product.name}
-            fill
-            className={`object-cover boty-transition group-hover:scale-105 transition-opacity duration-500 ${
-              imageLoaded ? 'opacity-100' : 'opacity-0'
-            }`}
-            onLoad={() => setImageLoaded(true)}
-          />
-          {/* Badge */}
-          {product.badge && (
-            <span
-              className={`absolute top-4 left-4 px-3 py-1 rounded-full text-xs tracking-wide ${
-                product.badge === "Sale"
-                  ? "bg-destructive/10 text-destructive"
-                  : product.badge === "New"
-                  ? "bg-primary/10 text-primary"
-                  : "bg-accent text-accent-foreground"
-              }`}
-            >
-              {product.badge}
-            </span>
-          )}
-          {/* Quick add button */}
-          <button
-            type="button"
-            className="absolute bottom-4 right-4 w-12 h-12 rounded-full bg-background/90 backdrop-blur-sm flex items-center justify-center opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 boty-transition boty-shadow"
-            onClick={(e) => {
-              e.preventDefault()
-            }}
-            aria-label="Add to cart"
-          >
-            <ShoppingBag className="w-5 h-5 text-foreground" />
-          </button>
-        </div>
-
-        {/* Info */}
-        <div className="p-6">
-          <h3 className="font-serif text-xl text-foreground mb-1">{product.name}</h3>
-          <p className="text-sm text-muted-foreground mb-4">{product.description}</p>
-          <div className="flex items-center gap-2">
-            <span className="text-lg font-medium text-foreground">${product.price}</span>
-            {product.originalPrice && (
-              <span className="text-sm text-muted-foreground line-through">
-                ${product.originalPrice}
-              </span>
-            )}
-          </div>
-        </div>
-      </div>
-    </Link>
+      <SiteFooter />
+    </div>
   )
 }

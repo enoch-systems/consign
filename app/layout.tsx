@@ -1,48 +1,27 @@
 import React from "react"
-import type { Metadata, Viewport } from 'next'
-import { DM_Sans, Playfair_Display } from 'next/font/google'
-import { Analytics } from '@vercel/analytics/next'
-import { CartProvider } from '@/components/boty/cart-context'
-import './globals.css'
+import type { Metadata, Viewport } from "next"
+import { DM_Sans } from "next/font/google"
+import { Analytics } from "@vercel/analytics/next"
+import { Toaster } from "@/components/ui/sonner"
+import { PlatformProvider } from "@/lib/platform-context"
+import "./globals.css"
 
-const dmSans = DM_Sans({ 
+const dmSans = DM_Sans({
   subsets: ["latin"],
-  variable: '--font-dm-sans',
-  weight: ['300', '400', '500', '600']
-});
-
-const playfairDisplay = Playfair_Display({ 
-  subsets: ["latin"],
-  variable: '--font-playfair',
-  weight: ['400', '500', '600', '700']
-});
+  variable: "--font-dm-sans",
+  weight: ["400", "500", "600", "700"],
+})
 
 export const metadata: Metadata = {
-  title: 'Boty — Natural Skincare',
-  description: 'Premium natural skincare and body care products. Glow gently with Boty.',
-  generator: 'v0.app',
-  keywords: ['skincare', 'natural', 'organic', 'beauty', 'body care', 'cruelty-free'],
-  icons: {
-    icon: [
-      {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
-    ],
-    apple: '/apple-icon.png',
-  },
+  title: "Consign | Freight visibility platform",
+  description:
+    "A professional logistics platform for booking consignments, tracking movements, and managing shipments across Nigeria and international lanes.",
+  generator: "v0.app",
+  keywords: ["logistics", "shipping", "tracking", "freight", "Nigeria", "delivery"],
 }
 
 export const viewport: Viewport = {
-  themeColor: '#F7F4EF',
+  themeColor: "#0B3A5B",
 }
 
 export default function RootLayout({
@@ -52,10 +31,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${dmSans.variable} ${playfairDisplay.variable} font-sans antialiased`}>
-        <CartProvider>
+      <body className={`${dmSans.variable} font-sans antialiased`}>
+        <PlatformProvider>
           {children}
-        </CartProvider>
+          <Toaster position="top-right" />
+        </PlatformProvider>
         <Analytics />
       </body>
     </html>
