@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { BrandLogo } from "@/components/shared/brand-logo";
 import { toast } from "sonner";
 import {
   Mail,
@@ -64,9 +65,7 @@ export default function CustomerLoginPage() {
             <Card className="boty-shadow relative overflow-hidden border border-border/80 bg-card/90 backdrop-blur-sm">
               <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-primary/60 to-transparent" aria-hidden="true" />
               <CardHeader className="space-y-3 pb-5 text-center">
-                <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-linear-to-br from-primary to-accent text-primary-foreground shadow-md shadow-primary/30">
-                  <Truck className="h-6 w-6" />
-                </div>
+                <BrandLogo className="mx-auto h-12 w-12 rounded-xl object-contain" />
                 <div className="space-y-1.5">
                   <CardTitle className="font-serif text-2xl leading-tight sm:text-3xl">Welcome back</CardTitle>
                   <CardDescription className="text-sm sm:text-base">

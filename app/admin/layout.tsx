@@ -5,6 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import { useAppState } from "@/lib/app-state";
 import { ThemeToggle } from "@/components/shared/theme-toggle";
+import { BrandLogo } from "@/components/shared/brand-logo";
 import { cn } from "@/lib/utils";
 import {
   Shield, Lock, LayoutDashboard, Package, MapPinned, Users,
@@ -139,11 +140,9 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
           </button>
 
           <Link href="/admin" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-cyan-500 flex items-center justify-center text-primary-foreground shadow-md shadow-primary/30">
-              <Truck className="w-4 h-4" />
-            </div>
+            <BrandLogo className="h-8 w-8 rounded-lg object-contain" />
             <div className="flex flex-col leading-none">
-              <span className="font-serif text-base font-semibold">Logix</span>
+              <span className="font-serif text-base font-semibold">ArcBest</span>
               <span className="text-[9px] uppercase tracking-[0.16em] text-muted-foreground mt-0.5">Ops</span>
             </div>
           </Link>
@@ -174,11 +173,9 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
           {/* Brand */}
           <div className="px-5 pt-5 pb-4 border-b border-sidebar-border/60">
             <Link href="/admin" className="flex items-center gap-2.5">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-slate-900 via-primary to-cyan-500 flex items-center justify-center text-white shadow-lg shadow-primary/30">
-                <Truck className="w-5 h-5" />
-              </div>
+              <BrandLogo className="h-10 w-10 rounded-xl object-contain" />
               <div className="flex flex-col leading-none">
-                <span className="font-serif text-xl font-semibold tracking-wide">Logix</span>
+                <span className="font-serif text-xl font-semibold tracking-wide">ArcBest</span>
                 <span className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground mt-1">Operations Console</span>
               </div>
             </Link>
@@ -226,7 +223,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-semibold truncate">Administrator</p>
-                  <p className="text-xs text-muted-foreground truncate">admin@logix.com</p>
+                  <p className="text-xs text-muted-foreground truncate">admin@arcbest.com</p>
                 </div>
               </div>
               <div className="flex items-center gap-2">
@@ -259,11 +256,9 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
             {/* Drawer Header */}
             <div className="flex items-center justify-between px-4 h-14 border-b border-sidebar-border/60">
               <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-cyan-500 flex items-center justify-center text-primary-foreground shadow-md shadow-primary/30">
-                  <Truck className="w-4 h-4" />
-                </div>
+                <BrandLogo className="h-8 w-8 rounded-lg object-contain" />
                 <div className="flex flex-col leading-none">
-                  <span className="font-serif text-base font-semibold">Logix</span>
+                  <span className="font-serif text-base font-semibold">ArcBest</span>
                   <span className="text-[9px] uppercase tracking-[0.16em] text-muted-foreground mt-0.5">Operations</span>
                 </div>
               </div>
@@ -285,7 +280,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-semibold truncate">Administrator</p>
-                    <p className="text-xs text-muted-foreground truncate">admin@logix.com</p>
+                    <p className="text-xs text-muted-foreground truncate">admin@arcbest.com</p>
                     <span className="inline-flex items-center gap-1 mt-1.5 text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 font-medium">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                       Online

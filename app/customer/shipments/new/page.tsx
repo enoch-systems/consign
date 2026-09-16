@@ -127,20 +127,29 @@ export default function CreateShipmentPage() {
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-7xl">
-      <div className="flex items-center gap-2 text-sm text-muted-foreground mb-5">
-        <Link href="/customer/dashboard" className="hover:text-foreground transition">Dashboard</Link>
-        <span>›</span>
-        <Link href="/customer/shipments" className="hover:text-foreground transition">Shipments</Link>
-        <span>›</span>
-        <span className="text-foreground">Create</span>
-      </div>
+      <div className="mb-5">
+        <Button asChild variant="ghost" className="mb-4 h-9 rounded-full px-3 text-sm text-muted-foreground hover:text-foreground">
+          <Link href="/customer/shipments" className="inline-flex items-center gap-2">
+            <ChevronLeft className="h-4 w-4" />
+            Back
+          </Link>
+        </Button>
 
-      <div className="flex flex-wrap items-start justify-between gap-4 mb-6">
-        <div>
-          <h1 className="font-serif text-3xl tracking-tight">Create a New Shipment</h1>
-          <p className="text-muted-foreground mt-1">Fill in sender, recipient, and package details. We&apos;ll show a summary before you confirm.</p>
+        <div className="mb-3 flex items-center gap-2 text-[10px] font-medium uppercase tracking-[0.22em]">
+          <span className="text-muted-foreground">Account</span>
+          <span className="text-muted-foreground/70">/</span>
+          <span className="text-primary">Shipments</span>
+          <span className="text-muted-foreground/70">/</span>
+          <span className="text-primary">Create</span>
         </div>
-        <Button asChild variant="outline" className="rounded-full"><Link href="/customer/shipments"><ArrowLeft className="w-4 h-4 mr-2" />Back to Shipments</Link></Button>
+
+        <div className="flex flex-wrap items-start justify-between gap-4">
+          <div>
+            <h1 className="font-serif text-3xl tracking-tight">Create a New Shipment</h1>
+            <p className="text-muted-foreground mt-1">Fill in sender, recipient, and package details. We&apos;ll show a summary before you confirm.</p>
+          </div>
+          <Button asChild variant="outline" className="rounded-full"><Link href="/customer/shipments"><ArrowLeft className="w-4 h-4 mr-2" />Back to Shipments</Link></Button>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">

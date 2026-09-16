@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { StatusBadge, formatCurrency, formatDate, formatDateTime } from "@/components/shared/status-badge";
 import type { ShipmentStatus } from "@/lib/types";
-import { Package, Search, ArrowRight, Plus, Truck, Filter, FolderKanban } from "lucide-react";
+import { Package, Search, ArrowRight, Plus, Truck, Filter, FolderKanban, ChevronLeft } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -57,23 +57,38 @@ export default function CustomerShipmentsPage() {
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-7xl">
-      <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-6">
-        <div>
-          <h1 className="font-serif text-3xl tracking-tight">My Shipments</h1>
-          <p className="text-muted-foreground">
-            {stats.total} total · {stats.active} active · {stats.delivered} delivered
-          </p>
+      <div className="mb-6">
+        <Button asChild variant="ghost" className="mb-4 h-9 rounded-full px-3 text-sm text-muted-foreground hover:text-foreground">
+          <Link href="/customer/dashboard" className="inline-flex items-center gap-2">
+            <ChevronLeft className="h-4 w-4" />
+            Back
+          </Link>
+        </Button>
+
+        <div className="mb-3 flex items-center gap-2 text-[10px] font-medium uppercase tracking-[0.22em]">
+          <span className="text-muted-foreground">Account</span>
+          <span className="text-muted-foreground/70">/</span>
+          <span className="text-primary">Shipments</span>
         </div>
-        <div className="flex gap-2">
-          <div className="flex-1 sm:w-72">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-              <Input value={q} onChange={(e) => setQ(e.target.value)} className="pl-10 rounded-full" placeholder="Search tracking, origin, destination…" />
-            </div>
+
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+          <div>
+            <h1 className="font-serif text-3xl tracking-tight">My Shipments</h1>
+            <p className="text-muted-foreground">
+              {stats.total} total · {stats.active} active · {stats.delivered} delivered
+            </p>
           </div>
-          <Button asChild className="rounded-full">
-            <Link href="/customer/shipments/new"><Plus className="w-4 h-4 mr-2" />New</Link>
-          </Button>
+          <div className="flex gap-2">
+            <div className="flex-1 sm:w-72">
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                <Input value={q} onChange={(e) => setQ(e.target.value)} className="pl-10 rounded-full" placeholder="Search tracking, origin, destination…" />
+              </div>
+            </div>
+            <Button asChild className="rounded-full">
+              <Link href="/customer/shipments/new"><Plus className="w-4 h-4 mr-2" />New</Link>
+            </Button>
+          </div>
         </div>
       </div>
 

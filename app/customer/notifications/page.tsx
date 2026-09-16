@@ -5,7 +5,7 @@ import { useAppState } from "@/lib/app-state";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { StatusBadge, formatDateTime } from "@/components/shared/status-badge";
-import { Bell, Check, Mail, PackageCheck, Truck, AlertTriangle, Package, ArrowRight, Inbox } from "lucide-react";
+import { Bell, Check, Mail, PackageCheck, Truck, AlertTriangle, Package, ArrowRight, Inbox, ChevronLeft } from "lucide-react";
 import type { NotificationType } from "@/lib/types";
 
 const TYPE_ICON: Record<NotificationType, React.ReactNode> = {
@@ -28,16 +28,31 @@ export default function CustomerNotificationsPage() {
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl">
-      <div className="flex flex-wrap items-end justify-between gap-3 mb-6">
-        <div>
-          <h1 className="font-serif text-3xl tracking-tight">Notifications</h1>
-          <p className="text-muted-foreground">{unread} unread · {all.length} total</p>
+      <div className="mb-6">
+        <Button asChild variant="ghost" className="mb-4 h-9 rounded-full px-3 text-sm text-muted-foreground hover:text-foreground">
+          <Link href="/customer/dashboard" className="inline-flex items-center gap-2">
+            <ChevronLeft className="h-4 w-4" />
+            Back
+          </Link>
+        </Button>
+
+        <div className="mb-3 flex items-center gap-2 text-[10px] font-medium uppercase tracking-[0.22em]">
+          <span className="text-muted-foreground">Account</span>
+          <span className="text-muted-foreground/70">/</span>
+          <span className="text-primary">Notifications</span>
         </div>
-        <div className="flex gap-2">
+
+        <div className="flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <h1 className="font-serif text-3xl tracking-tight">Notifications</h1>
+            <p className="text-muted-foreground">{unread} unread · {all.length} total</p>
+          </div>
+          <div className="flex gap-2">
           <Button asChild variant="outline" size="sm" className="rounded-full"><Link href="/customer/shipments">Shipments <ArrowRight className="w-3.5 h-3.5 ml-1" /></Link></Button>
-          <Button variant="outline" size="sm" className="rounded-full" disabled={unread === 0} onClick={() => markAllCustomerNotificationsRead(session?.userId || "")}>
-            <Check className="w-4 h-4 mr-1" />Mark all read
-          </Button>
+            <Button variant="outline" size="sm" className="rounded-full" disabled={unread === 0} onClick={() => markAllCustomerNotificationsRead(session?.userId || "")}>
+              <Check className="w-4 h-4 mr-1" />Mark all read
+            </Button>
+          </div>
         </div>
       </div>
 

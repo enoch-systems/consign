@@ -19,13 +19,13 @@ const SAVE = () => toast.success("Settings saved.", { description: "Changes will
 
 export default function AdminSettingsPage() {
   const [company, setCompany] = useState({
-    name: "Logix Logistics",
+    name: "ArcBest Logistics",
     tagline: "Delivering Reliability Every Step of the Way",
     phone: "+1 (800) 555-0147",
-    email: "support@logix.com",
+    email: "support@arcbest.com",
     address: "100 Market Street, New York, NY 10001",
     rcNumber: "",
-    website: "https://logix.com",
+    website: "https://arcbest.com",
   });
   const [shipping, setShipping] = useState({
     defaultCurrency: "USD",
@@ -61,7 +61,7 @@ export default function AdminSettingsPage() {
 
   const [admin, setAdmin] = useState({
     username: "admin",
-    email: "admin@logix.com",
+    email: "admin@arcbest.com",
     phone: "+1 (555) 123-4567",
     twoFa: false,
     sessionTimeout: "30",

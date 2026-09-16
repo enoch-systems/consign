@@ -7,6 +7,7 @@ import { useAppState } from "@/lib/app-state";
 import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
 import { ThemeToggle } from "@/components/shared/theme-toggle";
+import { BrandLogo } from "@/components/shared/brand-logo";
 import {
   Shield, UserRound, Lock, ArrowRight, Loader2, Eye, EyeOff, Truck,
   Package, Globe2, Clock, AlertCircle, ChevronLeft, Activity,
@@ -70,11 +71,9 @@ export default function AdminLoginPage() {
           {/* Left — Operations identity (desktop) */}
           <div className="hidden lg:flex flex-col gap-8">
             <div className="flex items-center gap-3">
-              <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-br from-slate-900 via-primary to-cyan-500 flex items-center justify-center text-white shadow-lg shadow-primary/30">
-                <Truck className="w-6 h-6" />
-              </div>
+              <BrandLogo className="h-12 w-12 rounded-2xl object-contain" />
               <div>
-                <p className="font-serif text-2xl font-semibold tracking-wide leading-none">Logix</p>
+                <p className="font-serif text-2xl font-semibold tracking-wide leading-none">ArcBest</p>
                 <p className="text-xs text-muted-foreground mt-1 uppercase tracking-[0.2em]">Operations Console</p>
               </div>
             </div>
@@ -123,11 +122,9 @@ export default function AdminLoginPage() {
           <div className="w-full max-w-md mx-auto">
             {/* Mobile-only brand */}
             <div className="flex lg:hidden items-center justify-center gap-2.5 mb-7">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-cyan-500 flex items-center justify-center text-primary-foreground shadow-md shadow-primary/30">
-                <Truck className="w-5 h-5" />
-              </div>
+              <BrandLogo className="h-10 w-10 rounded-xl object-contain" />
               <div>
-                <p className="font-serif text-xl font-semibold leading-none">Logix</p>
+                <p className="font-serif text-xl font-semibold leading-none">ArcBest</p>
                 <p className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground mt-0.5">Ops Console</p>
               </div>
             </div>
@@ -276,7 +273,7 @@ export default function AdminLoginPage() {
             </div>
 
             <p className="text-center text-xs text-muted-foreground mt-6">
-              © {new Date().getFullYear()} Logix Logistics · Operations Console · v2.1
+              © {new Date().getFullYear()} ArcBest Logistics · Operations Console · v2.1
             </p>
           </div>
         </div>

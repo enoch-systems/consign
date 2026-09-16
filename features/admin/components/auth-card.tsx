@@ -1,5 +1,6 @@
 import type { ReactNode } from "react"
-import { Shield, Truck } from "lucide-react"
+import { Shield } from "lucide-react"
+import { BrandLogo } from "@/components/shared/brand-logo"
 
 interface AuthCardProps {
   title: string
@@ -17,11 +18,9 @@ export function AuthCard({ title, subtitle, children, footer }: AuthCardProps) {
     <main className="min-h-screen flex items-center justify-center px-4 py-10 bg-background text-foreground ops-auth-grid">
       <div className="w-full max-w-md">
         <div className="flex items-center justify-center gap-2.5 mb-7">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-cyan-500 flex items-center justify-center text-white shadow-md shadow-primary/30 shrink-0">
-            <Truck className="w-5 h-5" />
-          </div>
+          <BrandLogo className="h-10 w-10 shrink-0 rounded-xl object-contain" />
           <div className="text-left">
-            <p className="font-serif text-xl font-semibold leading-none">Logix</p>
+            <p className="font-serif text-xl font-semibold leading-none">ArcBest</p>
             <p className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground mt-0.5">
               Operations Console
             </p>

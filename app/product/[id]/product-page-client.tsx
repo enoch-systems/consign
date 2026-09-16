@@ -379,10 +379,10 @@ export function ProductPageClient({ productId, initialProduct, initialSuggestion
     "@context": "https://schema.org",
     "@type": "Product",
     "name": product.name,
-    "description": product.description || `${product.name} is a premium quality hair product from Ammie N.`,
+    "description": product.description || `${product.name} is a premium logistics service from ArcBest.`,
     "image": realImages.map(img => getOptimizedProductImage(img, "detail")),
     "sku": product.id,
-    "brand": { "@type": "Brand", "name": "Ammie N" },
+    "brand": { "@type": "Brand", "name": "ArcBest" },
     "offers": {
       "@type": "Offer",
       "url": `https://ammiestore.com/product/${product.id}`,

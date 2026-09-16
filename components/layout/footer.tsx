@@ -2,9 +2,10 @@
 
 import Link from "next/link"
 import { useState } from "react"
-import { Truck, Phone, Mail, MapPin } from "lucide-react"
+import { Phone, Mail, MapPin } from "lucide-react"
 import { useAppState } from "@/lib/app-state"
 import { PolicyModal } from "@/components/shared/policy-modal"
+import { BrandLogo } from "@/components/shared/brand-logo"
 
 const footerLinks = {
   company: [
@@ -43,7 +44,7 @@ export function Footer() {
       {/* Giant Background Text */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 pointer-events-none select-none z-0">
         <span className="font-serif text-[140px] md:text-[300px] font-bold text-foreground/5 whitespace-nowrap leading-none">
-          LOGIX
+          ARCBEST
         </span>
       </div>
 
@@ -52,10 +53,8 @@ export function Footer() {
           {/* Brand */}
           <div className="col-span-2 md:col-span-2 lg:col-span-2">
             <Link href="/" className="inline-flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 rounded-xl bg-linear-to-br from-primary to-accent flex items-center justify-center text-primary-foreground shadow-md shadow-primary/30">
-                <Truck className="w-5 h-5" />
-              </div>
-              <span className="font-serif text-2xl font-semibold text-foreground">Logix</span>
+              <BrandLogo className="h-10 w-10 rounded-xl object-contain" />
+              <span className="font-serif text-2xl font-semibold text-foreground">ArcBest</span>
             </Link>
             <p className="text-sm text-muted-foreground leading-relaxed mb-6 max-w-md">
               Your trusted logistics partner for domestic and international shipping. Fast, reliable, and transparent delivery services across the United States and beyond.
@@ -67,7 +66,7 @@ export function Footer() {
               </div>
               <div className="flex items-start gap-3">
                 <Mail className="w-4 h-4 mt-0.5 shrink-0 text-primary" />
-                <a href="mailto:support@logix.com" className="hover:text-primary boty-transition">support@logix.com</a>
+                <a href="mailto:support@arcbest.com" className="hover:text-primary boty-transition">support@arcbest.com</a>
               </div>
               <div className="flex items-start gap-3">
                 <MapPin className="w-4 h-4 mt-0.5 shrink-0 text-primary" />
@@ -115,7 +114,7 @@ export function Footer() {
             <Link href="/contact" className="hover:text-primary boty-transition">Contact Support</Link>
           </div>
           <p className="text-xs text-muted-foreground text-center">
-            &copy; {new Date().getFullYear()} Logix Logistics LLC. All Rights Reserved.
+            &copy; {new Date().getFullYear()} ArcBest Logistics LLC. All Rights Reserved.
           </p>
         </div>
       </div>

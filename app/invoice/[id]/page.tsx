@@ -5,6 +5,7 @@ import { useParams } from "next/navigation"
 import Image from "next/image"
 import { Printer, Copy, Check, Clock, ChevronRight, Loader2 } from "lucide-react"
 import { supabase } from "@/lib/supabase"
+import { BRAND_LOGO_URL } from "@/components/shared/brand-logo"
 
 // ── Types ──
 
@@ -357,14 +358,14 @@ export default function InvoicePage() {
               <div className="flex items-start gap-4">
                 <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden bg-white flex-shrink-0 shadow-sm border border-neutral-200">
                   <Image
-                    src="https://res.cloudinary.com/deafv5ovi/image/upload/v1784555201/a_dow3yp.png"
-                    alt="Ammie N"
+                    src={BRAND_LOGO_URL}
+                    alt="ArcBest"
                     fill
                     className="object-contain"
                   />
                 </div>
                 <div>
-                  <p className="text-xs font-semibold text-neutral-400 uppercase tracking-[0.2em] mb-1">Ammie N</p>
+                  <p className="text-xs font-semibold text-neutral-400 uppercase tracking-[0.2em] mb-1">ArcBest</p>
                   <h1 className="text-[2rem] sm:text-[2.5rem] font-bold text-neutral-900 leading-none tracking-tight mb-2">
                     INVOICE
                   </h1>
@@ -495,7 +496,7 @@ export default function InvoicePage() {
 
             {/* ── Footer ── */}
             <div className="mt-16 pt-8 border-t border-neutral-100 text-center">
-              <p className="text-sm font-semibold text-neutral-800 mb-1">Thank you for choosing Ammie N</p>
+                  <p className="text-sm font-semibold text-neutral-800 mb-1">Thank you for choosing ArcBest</p>
               <p className="text-xs text-neutral-400 max-w-sm mx-auto leading-relaxed">
                 Wear confidence. Naturally you. &mdash; Premium human hair, wigs & extensions.
               </p>

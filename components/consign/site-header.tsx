@@ -2,9 +2,9 @@
 
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
-import { Box } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { usePlatform } from "@/lib/platform-context"
+import { BrandLogo } from "@/components/shared/brand-logo"
 
 export function SiteHeader() {
   const pathname = usePathname()
@@ -20,10 +20,8 @@ export function SiteHeader() {
     <header className="sticky top-0 z-40 border-b border-border/80 bg-background/90 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-2 font-semibold tracking-tight text-primary">
-          <span className="flex size-8 items-center justify-center rounded-md bg-primary text-primary-foreground">
-            <Box className="size-4" />
-          </span>
-          Consign
+          <BrandLogo className="size-8 rounded-md object-contain" />
+          ArcBest
         </Link>
         <nav className="hidden items-center gap-6 text-sm text-muted-foreground md:flex">
           <Link href="/#lanes" className={pathname === "/" ? "text-foreground" : "hover:text-foreground"}>

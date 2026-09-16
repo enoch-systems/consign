@@ -3,8 +3,9 @@
 import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+import Image from "next/image"
 import {
-  ArrowRight, Search, Package, Truck, Plane, Ship, MapPin, Clock, Shield,
+  ArrowRight, Search, LocateFixed, Package, Truck, Plane, PlaneTakeoff, Ship, MapPin, Clock, Shield,
   CheckCircle2, Globe, BarChart3, Users, Star, ChevronDown, ChevronRight,
   Zap, Award, Headphones, ArrowUpDown
 } from "lucide-react"
@@ -48,11 +49,17 @@ function Section({ id, eyebrow, title, subtitle, children, reverse = false, clas
   )
 }
 
+const heroVideoUrls = [
+  "https://res.cloudinary.com/qz5m8bhg/video/upload/v1789495881/From_Klickpin.com-_371335931789711588-pin-id-371335931789711588_ng2her.mp4",
+  "https://res.cloudinary.com/qz5m8bhg/video/upload/v1789495877/From_Klickpin.com-_94927504641887252-pin-id-94927504641887252_f0cwhx.mp4",
+]
+
 function Hero() {
   const router = useRouter()
   const { findShipmentByTracking } = useAppState()
   const [tracking, setTracking] = useState('')
   const [error, setError] = useState('')
+  const [videoIndex, setVideoIndex] = useState(0)
 
   const handleTrack = (e: React.FormEvent) => {
     e.preventDefault()
@@ -65,8 +72,20 @@ function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-accent/5" />
+      <div className="absolute inset-0 overflow-hidden">
+        <video
+          key={videoIndex}
+          autoPlay
+          muted
+          playsInline
+          preload="auto"
+          onEnded={() => setVideoIndex((current) => (current + 1) % heroVideoUrls.length)}
+          className="absolute inset-0 h-full w-full object-cover opacity-70 dark:opacity-35 mix-blend-multiply dark:mix-blend-screen grayscale brightness-110 dark:brightness-75 contrast-110 dark:contrast-125 saturate-0"
+          style={{ filter: 'saturate(0.2) brightness(1.05) contrast(1.1) blur(0.4px)' }}
+        >
+          <source src={heroVideoUrls[videoIndex]} type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-gradient-to-br from-background/35 via-background/55 to-background/70 dark:from-background/90 dark:via-background/75 dark:to-background/80" />
         <div className="absolute inset-0 opacity-[0.03]" style={{
           backgroundImage: 'radial-gradient(circle at 2px 2px, currentColor 1px, transparent 0)',
           backgroundSize: '32px 32px',
@@ -88,7 +107,7 @@ function Hero() {
                 Ship smarter. <br />
                 <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Track faster.</span>
               </h1>
-              <p className="text-base sm:text-lg md:text-xl leading-relaxed text-muted-foreground mt-6 max-w-xl animate-blur-in opacity-0" style={{ animationDelay: '0.45s', animationFillMode: 'forwards' }}>
+              <p className="text-base sm:text-lg md:text-xl leading-relaxed text-slate-800 dark:text-muted-foreground mt-6 max-w-xl animate-blur-in opacity-0" style={{ animationDelay: '0.45s', animationFillMode: 'forwards' }}>
                 A trusted US logistics platform for domestic and international shipping. Real-time tracking, reliable delivery, transparent pricing.
               </p>
 
@@ -110,23 +129,23 @@ function Hero() {
                     type="submit"
                     className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-xl text-sm sm:text-base font-medium boty-transition hover:bg-primary/90 shadow-md shadow-primary/30 cursor-pointer whitespace-nowrap"
                   >
-                    Track Shipment <ArrowRight className="w-4 h-4" />
+                    Track Shipment <LocateFixed className="w-4 h-4" />
                   </button>
                 </div>
                 {error && <p className="mt-3 text-sm text-destructive">{error}</p>}
                 <p className="mt-3 text-xs text-muted-foreground">Try: <span className="font-mono text-primary">LGX8429137</span> · <span className="font-mono text-primary">US45678291</span> · <span className="font-mono text-primary">LGS9201847</span></p>
               </form>
 
-              <div className="flex flex-wrap items-center gap-6 mt-10 animate-blur-in opacity-0" style={{ animationDelay: '0.8s', animationFillMode: 'forwards' }}>
+              <div className="flex flex-nowrap items-center gap-2 mt-10 animate-blur-in opacity-0 sm:gap-6" style={{ animationDelay: '0.8s', animationFillMode: 'forwards' }}>
                 <Link
                   href="/customer/signup"
-                  className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-gradient-to-r from-primary to-accent text-white font-medium boty-transition hover:opacity-95 shadow-lg shadow-primary/30 cursor-pointer text-sm sm:text-base"
+                    className="inline-flex min-w-0 flex-1 items-center justify-center gap-1.5 px-3 py-3 rounded-full border border-border bg-card text-foreground font-medium boty-transition hover:bg-accent/10 cursor-pointer text-xs whitespace-nowrap sm:flex-none sm:gap-2 sm:px-7 sm:py-3.5 sm:text-base"
                 >
-                  <Package className="w-4 h-4" /> Start Shipping
+                  <PlaneTakeoff className="w-4 h-4" /> Start Shipping
                 </Link>
                 <Link
                   href="/#how-it-works"
-                  className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-border bg-card text-foreground font-medium boty-transition hover:bg-accent/10 cursor-pointer text-sm sm:text-base"
+                    className="inline-flex min-w-0 flex-1 items-center justify-center gap-1.5 px-3 py-3 rounded-full border border-border/90 bg-transparent text-foreground font-medium boty-transition hover:bg-accent/10 cursor-pointer text-xs whitespace-nowrap sm:flex-none sm:gap-2 sm:px-7 sm:py-3.5 sm:text-base"
                 >
                   How it works <ChevronDown className="w-4 h-4" />
                 </Link>
@@ -135,56 +154,54 @@ function Hero() {
 
             {/* Right side: featured shipment status card */}
             <div className="relative animate-blur-in opacity-0" style={{ animationDelay: '0.5s', animationFillMode: 'forwards' }}>
-              <div className="relative bg-card rounded-3xl p-6 sm:p-8 logix-shadow border border-border">
-                <div className="flex items-center justify-between mb-6">
-                  <div>
-                    <div className="flex items-center gap-2 text-xs text-muted-foreground mb-1">
+              <div className="relative overflow-hidden rounded-3xl border border-border bg-card p-4 shadow-xl shadow-slate-950/10 sm:p-8">
+                <div className="mb-6 flex flex-wrap items-start justify-between gap-4">
+                  <div className="min-w-0">
+                    <div className="mb-1 flex items-center gap-2 text-xs text-muted-foreground">
                       <span className="font-mono">LGX · LIVE</span>
                       <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
                     </div>
-                    <div className="font-serif text-2xl sm:text-3xl font-semibold text-foreground">US45678291</div>
+                    <div className="truncate font-serif text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">US45678291</div>
                   </div>
-                  <div className="inline-flex items-center gap-1.5 rounded-full bg-violet-100 dark:bg-violet-500/20 px-3 py-1.5 text-xs font-semibold text-violet-700 dark:text-violet-300 border border-violet-200 dark:border-violet-500/30">
+                  <div className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-violet-200 bg-violet-100 px-3 py-1.5 text-xs font-semibold text-violet-700 dark:border-violet-500/30 dark:bg-violet-500/20 dark:text-violet-300">
                     <ArrowUpDown className="w-3 h-3" /> In Transit
                   </div>
                 </div>
 
-                <div className="relative mb-8">
-                  <div className="flex items-center justify-between mb-2 text-sm text-muted-foreground">
-                    <span>New York</span>
-                    <span className="text-primary font-medium">Dubai</span>
-                    <span>New York</span>
+                <div className="relative mb-6 rounded-2xl border border-border/70 bg-muted/20 p-4 sm:mb-8 sm:p-5">
+                  <div className="mb-3 flex items-end justify-between gap-3 text-xs sm:text-sm">
+                    <div className="min-w-0">
+                      <p className="mb-1 text-[10px] uppercase tracking-[0.16em] text-muted-foreground">Origin</p>
+                      <p className="truncate font-semibold text-foreground">New York, US</p>
+                    </div>
+                    <div className="min-w-0 text-right">
+                      <p className="mb-1 text-[10px] uppercase tracking-[0.16em] text-muted-foreground">Destination</p>
+                      <p className="truncate font-semibold text-foreground">New York, US</p>
+                    </div>
                   </div>
-                  <div className="relative h-2 rounded-full bg-muted overflow-hidden">
+                  <div className="relative h-2.5 overflow-hidden rounded-full bg-muted">
                     <div className="absolute inset-y-0 left-0 w-[62%] rounded-full bg-gradient-to-r from-primary via-accent to-primary" />
                     <div className="absolute top-1/2 -translate-y-1/2 left-[58%] w-5 h-5 rounded-full bg-primary border-4 border-card shadow-md shadow-primary/30 flex items-center justify-center">
                       <Plane className="w-2.5 h-2.5 text-primary-foreground" />
                     </div>
                   </div>
+                  <p className="mt-3 text-center text-xs text-muted-foreground">Current stop: <span className="font-medium text-primary">Dubai, UAE</span></p>
                 </div>
 
-                <div className="grid grid-cols-2 gap-3 mb-6">
-                  <div className="rounded-2xl bg-background/80 border border-border p-3 sm:p-4">
-                    <p className="text-xs text-muted-foreground">Origin</p>
-                    <p className="mt-1 text-sm font-semibold text-foreground">New York, US</p>
+                <div className="mb-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+                  <div className="min-w-0 rounded-2xl border border-border bg-background/80 p-3 sm:p-4">
+                    <p className="text-[10px] uppercase tracking-[0.16em] text-muted-foreground">Est. Delivery</p>
+                    <p className="mt-1 truncate text-sm font-semibold text-foreground">In 3 days</p>
                   </div>
-                  <div className="rounded-2xl bg-background/80 border border-border p-3 sm:p-4">
-                    <p className="text-xs text-muted-foreground">Destination</p>
-                    <p className="mt-1 text-sm font-semibold text-foreground">New York, US</p>
-                  </div>
-                  <div className="rounded-2xl bg-background/80 border border-border p-3 sm:p-4">
-                    <p className="text-xs text-muted-foreground">Est. Delivery</p>
-                    <p className="mt-1 text-sm font-semibold text-foreground">In 3 days</p>
-                  </div>
-                  <div className="rounded-2xl bg-background/80 border border-border p-3 sm:p-4">
-                    <p className="text-xs text-muted-foreground">Current Location</p>
-                    <p className="mt-1 text-sm font-semibold text-foreground">Dubai, UAE</p>
+                  <div className="min-w-0 rounded-2xl border border-border bg-background/80 p-3 sm:p-4">
+                    <p className="text-[10px] uppercase tracking-[0.16em] text-muted-foreground">Current Location</p>
+                    <p className="mt-1 truncate text-sm font-semibold text-foreground">Dubai, UAE</p>
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between pt-3 border-t border-border/60">
-                  <span className="text-xs text-muted-foreground">Shipped via International Air Freight</span>
-                  <Link href="/track/US45678291" className="text-xs font-semibold text-primary hover:underline inline-flex items-center gap-1">
+                <div className="flex flex-col gap-3 border-t border-border/60 pt-4 sm:flex-row sm:items-center sm:justify-between">
+                  <span className="text-xs leading-5 text-muted-foreground">Shipped via <span className="font-medium text-foreground">International Air Freight</span></span>
+                  <Link href="/track/US45678291" className="inline-flex items-center gap-1 self-start text-xs font-semibold text-primary hover:underline sm:self-auto">
                     View details <ChevronRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>
@@ -219,54 +236,113 @@ function Hero() {
 
 function StatsStrip() {
   const stats = [
-    { label: 'Shipments Delivered', value: '1.2M+', Icon: Package },
-    { label: 'Cities Covered', value: '2,400+', Icon: MapPin },
-    { label: 'Happy Customers', value: '25,000+', Icon: Users },
-    { label: 'On-Time Rate', value: '98.6%', Icon: CheckCircle2 },
+    { label: 'Shipments Delivered', target: 1.2, suffix: 'M+', Icon: Package },
+    { label: 'Cities Covered', target: 2400, suffix: '+', Icon: MapPin },
+    { label: 'Happy Customers', target: 25000, suffix: '+', Icon: Users },
+    { label: 'On-Time Rate', target: 98.6, suffix: '%', Icon: CheckCircle2 },
   ]
   return (
     <div className="relative -mt-12 z-10">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="bg-card rounded-3xl border border-border logix-shadow grid grid-cols-2 md:grid-cols-4 divide-x divide-y md:divide-y-0 divide-border/60 overflow-hidden">
-          {stats.map(({ label, value, Icon }, i) => (
-            <div key={label} className="p-5 sm:p-8 text-center">
-              <div className="inline-flex w-12 h-12 rounded-2xl bg-primary/10 text-primary items-center justify-center mb-3">
-                <Icon className="w-6 h-6" />
-              </div>
-              <div className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-foreground">{value}</div>
-              <div className="mt-1 text-xs sm:text-sm text-muted-foreground">{label}</div>
-            </div>
-          ))}
+          {stats.map((stat, i) => <AnimatedStat key={stat.label} {...stat} index={i} />)}
         </div>
       </div>
     </div>
   )
 }
 
+function AnimatedStat({ label, target, suffix, Icon, index }: { label: string; target: number; suffix: string; Icon: typeof Package; index: number }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const [value, setValue] = useState(0)
+  const [visible, setVisible] = useState(false)
+
+  useEffect(() => {
+    const element = ref.current
+    if (!element) return
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setVisible(true)
+        observer.disconnect()
+      }
+    }, { threshold: 0.35 })
+    observer.observe(element)
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    if (!visible) return
+    let frame = 0
+    let start = 0
+    let loop: number
+
+    const runCounter = () => {
+      window.cancelAnimationFrame(frame)
+      start = 0
+      setValue(0)
+      const animate = (time: number) => {
+        if (!start) start = time
+        const progress = Math.min((time - start) / 1300, 1)
+        const eased = 1 - Math.pow(1 - progress, 3)
+        setValue(target * eased)
+        if (progress < 1) frame = requestAnimationFrame(animate)
+      }
+      frame = requestAnimationFrame(animate)
+    }
+
+    const delay = window.setTimeout(() => {
+      runCounter()
+      loop = window.setInterval(runCounter, 10000)
+    }, index * 140)
+
+    return () => {
+      window.clearTimeout(delay)
+      window.clearInterval(loop)
+      window.cancelAnimationFrame(frame)
+    }
+  }, [index, target, visible])
+
+  const display = target < 100 ? value.toFixed(1) : Math.round(value).toLocaleString()
+  const entrance = ['-translate-x-5', 'translate-y-5', 'translate-x-5', 'translate-y-5'][index]
+
+  return (
+    <div ref={ref} className={`p-5 text-center transition-all duration-700 sm:p-8 ${visible ? 'translate-x-0 translate-y-0 opacity-100' : `${entrance} opacity-0`}`}>
+      <div className="mb-3 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+        <Icon className="h-6 w-6" />
+      </div>
+      <div className="font-serif text-2xl font-bold text-foreground sm:text-3xl md:text-4xl">{display}{suffix}</div>
+      <div className="mt-1 text-xs text-muted-foreground sm:text-sm">{label}</div>
+    </div>
+  )
+}
+
 function Services() {
   const services = [
-    { title: 'Domestic Delivery', desc: 'Fast door-to-door shipping across all 50 states within 1-3 business days.', Icon: Truck, color: 'from-blue-500 to-cyan-500' },
-    { title: 'International Shipping', desc: 'Worldwide delivery via air, sea and express partners. Customs cleared to 190+ countries.', Icon: Plane, color: 'from-violet-500 to-fuchsia-500' },
-    { title: 'Sea Freight', desc: 'Cost-effective bulk cargo and container shipping for commercial import / export.', Icon: Ship, color: 'from-teal-500 to-emerald-500' },
-    { title: 'Warehousing', desc: 'Secure storage, inventory management, and fulfilment services across our network hubs.', Icon: Package, color: 'from-amber-500 to-orange-500' },
-    { title: 'Express Courier', desc: 'Same-day and next-day urgent deliveries in major US metropolitan areas.', Icon: Zap, color: 'from-rose-500 to-red-500' },
-    { title: 'Cargo Insurance', desc: 'Optional comprehensive insurance for loss, damage, theft with every shipment.', Icon: Shield, color: 'from-indigo-500 to-blue-600' },
+    { title: 'Domestic Delivery', desc: 'Fast door-to-door shipping across all 50 states within 1-3 business days.', image: 'https://res.cloudinary.com/qz5m8bhg/image/upload/v1789537779/van_keybjj.png', tag: '01 · Last mile' },
+    { title: 'International Shipping', desc: 'Worldwide delivery via air, sea and express partners. Customs cleared to 190+ countries.', image: 'https://res.cloudinary.com/qz5m8bhg/image/upload/v1789536860/1_3_efyhqf.png', tag: '02 · Global network' },
+    { title: 'Sea Freight', desc: 'Cost-effective bulk cargo and container shipping for commercial import / export.', image: 'https://res.cloudinary.com/qz5m8bhg/image/upload/v1789536854/1_4_oeat8u.png', tag: '03 · Ocean lanes' },
+    { title: 'Warehousing', desc: 'Secure storage, inventory management, and fulfilment services across our network hubs.', image: 'https://res.cloudinary.com/qz5m8bhg/image/upload/v1789537776/warehouse_wnzrat.png', tag: '04 · Fulfilment' },
+    { title: 'Express Courier', desc: 'Same-day and next-day urgent deliveries in major US metropolitan areas.', image: 'https://res.cloudinary.com/qz5m8bhg/image/upload/v1789536854/1_2_kxe8pc.png', tag: '05 · Priority' },
+    { title: 'Cargo Insurance', desc: 'Optional comprehensive insurance for loss, damage, theft with every shipment.', image: 'https://res.cloudinary.com/qz5m8bhg/image/upload/v1789536865/1_1_xyjovj.png', tag: '06 · Protection' },
   ]
   return (
     <Section id="services" eyebrow="Our Services" title="Everything logistics, one platform" subtitle="From small envelopes to full containers, we handle every stage of your supply chain with reliability and visibility.">
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
-        {services.map(({ title, desc, Icon, color }, i) => (
-          <div key={title} className="group relative bg-card rounded-2xl border border-border p-6 sm:p-7 boty-transition hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/10 overflow-hidden">
-            <div className={`absolute -right-10 -top-10 w-32 h-32 rounded-full bg-gradient-to-br ${color} opacity-[0.08] group-hover:opacity-20 boty-transition`} />
-            <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${color} flex items-center justify-center text-white mb-5 shadow-lg`}>
-              <Icon className="w-7 h-7" />
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-12">
+        {services.map(({ title, desc, image, tag }, i) => (
+          <article key={title} className={`group relative overflow-hidden rounded-[26px] border border-border/80 bg-card transition duration-500 hover:-translate-y-1 hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/10 ${i < 2 ? 'lg:col-span-6' : 'lg:col-span-4'}`}>
+            <div className={`relative flex items-center justify-center overflow-hidden border-b border-border/70 bg-primary/[0.035] ${i < 2 ? 'h-44 sm:h-52' : 'h-36 sm:h-40'}`}>
+              <div className="absolute left-5 top-4 z-10 text-[10px] font-semibold uppercase tracking-[0.2em] text-primary/75">{tag}</div>
+              <div className="absolute -right-12 -top-12 h-32 w-32 rounded-full border border-primary/10 transition duration-700 group-hover:scale-150" />
+              <Image src={image} alt="" fill sizes="(max-width: 640px) 92vw, (max-width: 1024px) 46vw, 31vw" priority={i < 2} className="object-contain p-[14%] transition duration-700 ease-out group-hover:scale-110" />
             </div>
-            <h3 className="font-serif text-xl font-semibold text-foreground mb-2">{title}</h3>
-            <p className="text-sm leading-relaxed text-muted-foreground">{desc}</p>
-            <div className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-primary opacity-70 group-hover:opacity-100 boty-transition">
-              Learn more <ChevronRight className="w-4 h-4 group-hover:translate-x-0.5 boty-transition" />
+            <div className="flex min-h-[178px] flex-col p-5 sm:p-6">
+              <h3 className="font-serif text-xl font-semibold tracking-tight text-foreground sm:text-2xl">{title}</h3>
+              <p className="mt-2 max-w-md text-sm leading-6 text-muted-foreground">{desc}</p>
+              <div className="mt-auto pt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-primary">
+                Learn more <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </div>
             </div>
-          </div>
+          </article>
         ))}
       </div>
     </Section>
@@ -343,7 +419,7 @@ function WhyUs() {
     { title: 'Transparent pricing', desc: 'Upfront quotes with no hidden fees. Clear breakdown of shipping, insurance and customs.', Icon: Globe },
   ]
   return (
-    <Section eyebrow="Why Logix" title="Why thousands of companies choose us" subtitle="Built for the way US businesses ship today — reliable, fast, and technology-first.">
+    <Section eyebrow="Why ArcBest" title="Why thousands of companies choose us" subtitle="Built for the way US businesses ship today — reliable, fast, and technology-first.">
       <div className="grid md:grid-cols-2 gap-5 md:gap-6">
         {rows.map(({ title, desc, Icon }) => (
           <div key={title} className="flex gap-4 sm:gap-5 p-5 sm:p-7 bg-card rounded-2xl border border-border hover:shadow-lg hover:shadow-primary/10 boty-transition">

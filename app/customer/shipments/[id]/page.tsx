@@ -73,11 +73,15 @@ export default function CustomerShipmentDetailPage() {
           </div>
         </div>
         <div className="flex gap-2">
-          <Button asChild variant="outline" size="sm" className="rounded-full" href={`/track/${shipment.trackingNumber}`}>
-            Public Link <ArrowRight className="w-3.5 h-3.5 ml-1" />
+          <Button asChild variant="outline" size="sm" className="rounded-full">
+            <Link href={`/track/${shipment.trackingNumber}`}>
+              Public Link <ArrowRight className="w-3.5 h-3.5 ml-1" />
+            </Link>
           </Button>
-          <Button asChild size="sm" className="rounded-full" href="/customer/shipments/new">
-            <Package className="w-4 h-4 mr-1" /> New
+          <Button asChild size="sm" className="rounded-full">
+            <Link href="/customer/shipments/new">
+              <Package className="w-4 h-4 mr-1" /> New
+            </Link>
           </Button>
         </div>
       </div>

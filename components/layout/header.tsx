@@ -3,9 +3,10 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
-import { Menu, X, Package, LogOut, User, Bell, LayoutDashboard, Truck, BarChart3, Activity, Settings, Users, MapPinned } from "lucide-react"
+import { Menu, X, Package, LogOut, User, Bell, LayoutDashboard, Truck, BarChart3, Activity, Settings, Users, MapPinned, Home, Globe, Route, CircleHelp, Phone, ShieldCheck, MoveLeft } from "lucide-react"
 import { useAppState } from "@/lib/app-state"
 import { ThemeToggle } from "@/components/shared/theme-toggle"
+import { BrandLogo } from "@/components/shared/brand-logo"
 import { cn } from "@/lib/utils"
 
 type Variant = "default" | "admin" | "customer"
@@ -80,11 +81,9 @@ export function Header({ variant = "default" }: { variant?: Variant } = {}) {
   const Brand = ({ centered = false }: { centered?: boolean }) => (
     <Link href={isAdmin ? "/admin" : isCustomer ? "/customer/dashboard" : "/"} className={cn(centered && "lg:absolute lg:left-1/2 lg:-translate-x-1/2")}>
       <div className="flex items-center gap-2">
-        <div className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center text-primary-foreground shadow-md shadow-primary/30">
-          <Truck className="w-4 h-4 sm:w-5 sm:h-5" />
-        </div>
+        <BrandLogo className="h-8 w-8 rounded-lg object-contain sm:h-9 sm:w-9" />
         <span className="font-serif text-xl sm:text-2xl tracking-wide text-foreground font-semibold">
-          Logix
+          ArcBest
         </span>
       </div>
     </Link>
@@ -230,7 +229,7 @@ export function Header({ variant = "default" }: { variant?: Variant } = {}) {
               <button
                 type="button"
                 onClick={() => setShowLogoutModal(true)}
-                className="inline-flex items-center gap-2 ml-1 sm:ml-2 bg-destructive/10 text-destructive px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm tracking-wide boty-transition hover:bg-destructive/20 cursor-pointer"
+                className={cn("hidden", adminDesktopClass, "items-center gap-2 ml-1 sm:ml-2 bg-destructive/10 text-destructive px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm tracking-wide boty-transition hover:bg-destructive/20 cursor-pointer")}
               >
                 <LogOut className="w-4 h-4" />
                 <span className="hidden sm:inline">Logout</span>
@@ -276,6 +275,13 @@ export function Header({ variant = "default" }: { variant?: Variant } = {}) {
               {variant === "default" && !session && (
                 <>
                   <Link
+                    href="/"
+                    className="flex w-full items-center justify-center gap-2 py-3 rounded-full bg-primary/10 text-primary text-sm boty-transition hover:bg-primary/15"
+                  >
+                    <MoveLeft className="w-4 h-4" />
+                    Back to Home
+                  </Link>
+                  <Link
                     href="/customer/login"
                     className="block w-full text-center py-3 rounded-full border border-border text-foreground text-sm boty-transition hover:bg-accent/10"
                   >
@@ -289,16 +295,27 @@ export function Header({ variant = "default" }: { variant?: Variant } = {}) {
                   </Link>
                 </>
               )}
+
               {variant === "default" && session?.role === "customer" && (
-                <>
-                  <Link
-                    href="/customer/dashboard"
-                    className="block w-full text-center py-3 rounded-full bg-primary/10 text-primary text-sm boty-transition"
-                  >
-                    Go to Dashboard
-                  </Link>
-                </>
+                <Link
+                  href="/customer/dashboard"
+                  className="flex w-full items-center justify-center gap-2 py-3 rounded-full bg-primary/10 text-primary text-sm boty-transition hover:bg-primary/15"
+                >
+                  <MoveLeft className="w-4 h-4" />
+                  Back to Home
+                </Link>
               )}
+
+              {isAdmin && (
+                <Link
+                  href="/admin"
+                  className="flex w-full items-center justify-center gap-2 py-3 rounded-full bg-primary/10 text-primary text-sm boty-transition hover:bg-primary/15"
+                >
+                  <MoveLeft className="w-4 h-4" />
+                  Back to Home
+                </Link>
+              )}
+
               {(isAdmin || isCustomer) && (
                 <button
                   type="button"
@@ -356,7 +373,13 @@ export function Header({ variant = "default" }: { variant?: Variant } = {}) {
 
 function NavIcon({ name }: { name: string }) {
   const icons = {
+    Home,
     Dashboard: LayoutDashboard,
+    Services: Package,
+    "How It Works": Route,
+    Coverage: Globe,
+    FAQ: CircleHelp,
+    Contact: Phone,
     Shipments: Package,
     Tracking: MapPinned,
     Users,
@@ -367,10 +390,6 @@ function NavIcon({ name }: { name: string }) {
     Notifications: Bell,
     Profile: User,
   }
-  const Icon = icons[name as keyof typeof icons] || ArrowIcon
+  const Icon = icons[name as keyof typeof icons] || ShieldCheck
   return <Icon className="h-4 w-4 shrink-0" />
-}
-
-function ArrowIcon() {
-  return <span className="h-1.5 w-1.5 rounded-full bg-current" />
 }

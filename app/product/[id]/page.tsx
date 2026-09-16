@@ -46,7 +46,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       .single()
 
     if (!product) {
-      return { title: "Product Not Found — Ammie N" }
+      return { title: "Product Not Found — ArcBest" }
     }
 
     const imageUrl = product.images?.[0]
@@ -54,22 +54,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       : undefined
 
     return {
-      title: `${product.name} — Ammie N Premium Hair`,
-      description: product.description || `${product.name} — Premium quality hair from Ammie N.`,
+      title: `${product.name} — ArcBest Logistics`,
+      description: product.description || `${product.name} — Premium logistics service from ArcBest.`,
       openGraph: {
-        title: `${product.name} — Ammie N`,
-        description: product.description || `${product.name} — Premium quality hair from Ammie N.`,
+        title: `${product.name} — ArcBest`,
+        description: product.description || `${product.name} — Premium logistics service from ArcBest.`,
         images: imageUrl ? [{ url: imageUrl, width: 1200, height: 1200 }] : [],
       },
       twitter: {
         card: "summary_large_image",
-        title: `${product.name} — Ammie N`,
-        description: product.description || `${product.name} — Premium quality hair from Ammie N.`,
+        title: `${product.name} — ArcBest`,
+        description: product.description || `${product.name} — Premium logistics service from ArcBest.`,
         images: imageUrl ? [imageUrl] : [],
       },
     }
   } catch {
-    return { title: "Product — Ammie N" }
+    return { title: "Product — ArcBest" }
   }
 }
 

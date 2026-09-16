@@ -28,7 +28,7 @@ export function Hero() {
             <div key={`${heroImages[index]}-${index}`} className="h-full flex-1 overflow-hidden rounded-[1.5rem] transition-all duration-700 ease-in-out">
               <img
                 src={heroImages[index]}
-                alt="Ammie N premium hair collection"
+                alt="ArcBest logistics services"
                 className="h-full w-full object-cover"
                 style={{
                   objectPosition: "center center",
@@ -42,7 +42,7 @@ export function Hero() {
         <div className="xl:hidden absolute inset-0">
           <img
             src={heroImages[0]}
-            alt="Ammie N premium hair collection"
+            alt="ArcBest logistics services"
             className="h-full w-full object-cover"
             style={{
               objectPosition: "center center",

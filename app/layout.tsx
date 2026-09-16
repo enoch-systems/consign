@@ -7,6 +7,7 @@ import { QueryProvider } from '@/components/providers/query-provider'
 import { LenisProvider } from '@/components/providers/lenis-provider'
 import { ThemeProvider } from '@/components/providers/theme-provider'
 import { AppStateProvider } from '@/lib/app-state'
+import { BRAND_LOGO_URL } from '@/components/shared/brand-logo'
 import './globals.css'
 
 const dmSans = DM_Sans({ 
@@ -22,13 +23,13 @@ const playfairDisplay = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: 'Logix — Logistics & Shipment Tracking',
+  title: 'ArcBest — Logistics & Shipment Tracking',
   description: 'Professional logistics platform for domestic and international shipping. Track shipments in real-time, create new deliveries, and manage your entire logistics operation.',
   generator: 'v0.app',
   keywords: ['logistics', 'shipping', 'delivery', 'cargo', 'courier', 'freight', 'tracking', 'shipment', 'supply chain', 'US logistics'],
   icons: {
-    icon: '/icon.svg',
-    apple: '/apple-icon.png',
+    icon: BRAND_LOGO_URL,
+    apple: BRAND_LOGO_URL,
   },
 }
 
@@ -50,6 +51,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="preconnect" href="https://res.cloudinary.com" />
+        <link rel="preload" as="image" href={BRAND_LOGO_URL} fetchPriority="high" />
+      </head>
       <body className={`${dmSans.variable} ${playfairDisplay.variable} font-sans antialiased overflow-x-hidden`}>
         <ThemeProvider
           attribute="class"

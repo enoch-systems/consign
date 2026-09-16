@@ -18,9 +18,9 @@ const contactChannels = [
   {
     name: "Email",
     icon: Mail,
-    primary: "support@logix.com",
+    primary: "support@arcbest.com",
     secondary: "Reply within 2 hours",
-    href: "mailto:support@logix.com",
+    href: "mailto:support@arcbest.com",
   },
   {
     name: "Live Chat",
@@ -124,7 +124,7 @@ export default function ContactPage() {
                 <ul className="space-y-5">
                   {[
                     { label: "Support", val: "+1 (800) 555-0147", Icon: Phone },
-                    { label: "Sales", val: "sales@logix.com", Icon: Mail },
+                    { label: "Sales", val: "sales@arcbest.com", Icon: Mail },
                     { label: "Head Office", val: "100 Market Street, New York, NY 10001", Icon: MapPin },
                     { label: "Business Hours", val: "24 / 7 · 365 days", Icon: Clock },
                   ].map((r) => (

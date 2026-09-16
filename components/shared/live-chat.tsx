@@ -24,10 +24,10 @@ function nowTime() {
 }
 
 const AGENT_GREETING =
-  "Hi there 👋 You're chatting with Logix Support. How can we help you today?"
+  "Hi there 👋 You're chatting with ArcBest Support. How can we help you today?"
 
 const AGENT_AUTO_REPLY =
-  "Thanks for your message! A live specialist will pick this up shortly. For urgent help, email support@logix.com or call +1 (800) 555-0147 — we're available 24/7."
+  "Thanks for your message! A live specialist will pick this up shortly. For urgent help, email support@arcbest.com or call +1 (800) 555-0147 — we're available 24/7."
 
 /**
  * Floating live support chat widget.
@@ -106,7 +106,7 @@ export function LiveChatWidget() {
       {open && (
         <div
           role="dialog"
-          aria-label="Logix live chat"
+          aria-label="ArcBest live chat"
           className="fixed z-[90] left-3 right-3 sm:left-auto sm:w-[24rem] bottom-[calc(4.75rem+env(safe-area-inset-bottom))] sm:bottom-24 sm:right-6 flex flex-col max-h-[min(30rem,72dvh)] bg-card border border-border rounded-3xl logix-shadow overflow-hidden animate-scale-fade-in"
         >
           {/* Header */}
@@ -115,7 +115,7 @@ export function LiveChatWidget() {
               <Headphones className="w-5 h-5" />
             </div>
             <div className="flex-1 min-w-0">
-              <p className="font-serif text-base font-semibold leading-tight">Logix Support</p>
+              <p className="font-serif text-base font-semibold leading-tight">ArcBest Support</p>
               <p className="text-xs text-white/80 flex items-center gap-1.5 mt-0.5">
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-300" /> Online · replies in minutes
               </p>
@@ -180,7 +180,7 @@ export function LiveChatWidget() {
               </button>
             </div>
             <p className="mt-2 text-center text-[10px] text-muted-foreground">
-              Powered by Logix Live · Available 24/7
+              Powered by ArcBest Live · Available 24/7
             </p>
           </form>
         </div>

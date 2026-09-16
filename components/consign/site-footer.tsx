@@ -5,7 +5,7 @@ export function SiteFooter() {
     <footer className="border-t bg-primary text-primary-foreground">
       <div className="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-10 md:flex-row md:items-start md:justify-between">
         <div>
-          <p className="text-lg font-semibold">Consign</p>
+          <p className="text-lg font-semibold">ArcBest</p>
           <p className="mt-2 max-w-sm text-sm text-primary-foreground/75">
             A modern logistics platform for booking consignments, managing handoffs, and keeping customers informed at every step.
           </p>

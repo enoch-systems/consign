@@ -22,7 +22,7 @@ const faqCategories = [
       { q: "How long does domestic delivery take?", a: "Standard: 2-3 business days between major US cities and 3-5 business days for remote areas. Express: next business day in major metropolitan areas. Premium: same-day delivery may be available in select service areas." },
       { q: "What is the cost of shipping?", a: "Costs are dynamically calculated in USD based on origin, destination, actual versus dimensional weight, and service level." },
       { q: "Can I schedule a pickup time?", a: "Yes. When creating a shipment you can choose from time slots: Morning (9AM–12PM), Afternoon (12PM–4PM), or Evening (4PM–7PM). A confirmation SMS will be sent the day before." },
-      { q: "Do you deliver across the United States?", a: "Yes. Logix serves all 50 states, including remote areas that may require 1-2 additional business days for last-mile delivery." },
+      { q: "Do you deliver across the United States?", a: "Yes. ArcBest serves all 50 states, including remote areas that may require 1-2 additional business days for last-mile delivery." },
     ]
   },
   {
@@ -46,7 +46,7 @@ const faqCategories = [
     title: "Business Accounts & Bulk Shipping",
     questions: [
       { q: "Do you offer corporate rates?", a: "For high-volume shippers (20+ shipments / month) we offer custom pricing, volume discounts up to 35%, dedicated account managers, weekly invoicing, and API / Excel bulk upload integrations." },
-      { q: "Can I import goods using Logix?", a: "Yes. We provide end-to-end international shipping services including overseas pickup, freight coordination, customs documentation, and final-mile delivery. Contact sales@logix.com for a quote." },
+      { q: "Can I import goods using ArcBest?", a: "Yes. We provide end-to-end international shipping services including overseas pickup, freight coordination, customs documentation, and final-mile delivery. Contact sales@arcbest.com for a quote." },
     ]
   },
   {
@@ -147,7 +147,7 @@ export default function FAQPage() {
               Can't find the answer you're looking for? Reach out to our friendly support team, 24/7.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <a href="mailto:support@logix.com" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-8 py-3.5 rounded-full text-sm tracking-wide boty-transition hover:bg-primary/90 cursor-pointer">
+              <a href="mailto:support@arcbest.com" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-8 py-3.5 rounded-full text-sm tracking-wide boty-transition hover:bg-primary/90 cursor-pointer">
                 Email Support
               </a>
               <a href="tel:+18005550147" className="inline-flex items-center justify-center gap-2 bg-card border border-border text-foreground px-8 py-3.5 rounded-full text-sm tracking-wide boty-transition hover:bg-accent/10 cursor-pointer">
